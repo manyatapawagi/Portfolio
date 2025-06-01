@@ -121,3 +121,11 @@
   width: 40px;
   margin: 0px 10px;
 }
+
+@media only screen and (max-width: 630px) {
+  .hero .font_box {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+}

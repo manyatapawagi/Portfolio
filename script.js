@@ -2,12 +2,12 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
+//Basic Scene setup
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xc0f1ee);
 
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('globeCanvas'), alpha: true });
 renderer.setSize(500, 500);
-// renderer.setPixelRatio(window.devicePixelRatio);
 renderer.physicallyCorrectLights = true;
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.shadows = true;
@@ -31,7 +31,7 @@ scene.add(camera);
 
 controls.update();
 
-// Light
+// Lights
 const Alight = new THREE.AmbientLight(0xffffff, 8);
 Alight.position.set(2, 2, 2);
 scene.add(Alight);
@@ -44,7 +44,7 @@ const Dlight2 = new THREE.DirectionalLight(0xffffff, 3);
 Dlight2.position.set(-5, -10, -5);
 scene.add(Dlight2);
 
-// Load GLB model
+// Load Globe model
 const loader = new GLTFLoader();
 
 loader.load('globe.glb', function (gltf) {
