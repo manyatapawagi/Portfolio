@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&family=Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.hero {
+  width: 100%;
+  height: 100vh;
+  background-color: #e0f5fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero .font_box {
+  background-color: #f3e5f5;
+  padding: 15px;
+  border-radius: 15px;
+  width: 500px;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 8px solid #ce93d8;
+  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.05);
+}
+
+.hero p {
+  text-align: justify;
+  margin: 10px;
+}
+
+.hero img {
+  width: 200px;
+  border-radius: 100%;
+  border: 5px solid #ce93d8;
+}
+
+.heading {
+  font-size: 50px;
+  font-family: "Audiowide", sans-serif;
+  color: #a828cb;
+}
+
+.text {
+  font-family: "Neuton", serif;
+  font-weight: 300;
+  color: #2b2b2b;
+}
+
+.interests {
+  width: calc(100% - 20px);
+  background-color: rgb(192, 241, 238);
+  padding: 10px;
+}
+
+.interests p {
+  width: calc(100% - 20px);
+  text-align: center;
+  padding: 10px;
+}
+
+.interests .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.interests .globe {
+  width: 500px;
+  height: 500px;
+  margin: 10px;
+}
+
+#globeCanvas {
+  display: block;
+  margin: 10px;
+}
+
+.interests .text {
+  width: 240px;
+  margin: 10px;
+  position: relative;
+  padding: 10px;
+  border-radius: 20px;
+  z-index: 1;
+}
+
+.projects {
+  width: calc(100% - 20px);
+  padding: 10px;
+  background-color: rgb(150, 219, 222);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container {
+  width: 80%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.project {
+  aspect-ratio: 3/2;
+  background-color: rgb(157, 159, 158);
+  margin: 15px;
+  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.05);
+}
+
+.footer {
+  width: calc(100% - 20px);
+  padding: 10px;
+  background-color: #6ec6dc;
+}
+
+.footer a img {
+  width: 40px;
+  margin: 0px 10px;
+}
