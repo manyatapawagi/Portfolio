@@ -3,12 +3,13 @@
 * {
   margin: 0;
   padding: 0;
+  transition: 1s all;
 }
 
 .hero {
   width: 100%;
   height: 100vh;
-  background-color: #e0f5fa;
+  background-color: #454249;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,7 +42,12 @@
 .heading {
   font-size: 50px;
   font-family: "Audiowide", sans-serif;
-  color: #a828cb;
+  color: #b72bde;
+}
+
+h2 {
+  font-family: "Audiowide", sans-serif;
+  text-align: center;
 }
 
 .text {
@@ -52,7 +58,7 @@
 
 .interests {
   width: calc(100% - 20px);
-  background-color: rgb(192, 241, 238);
+  background-color: black;
   padding: 10px;
 }
 
@@ -66,11 +72,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
 }
 
 .interests .globe {
-  width: 500px;
-  height: 500px;
+  width: 350px;
+  height: 350px;
   margin: 10px;
 }
 
@@ -80,26 +87,41 @@
 }
 
 .interests .text {
-  width: 240px;
-  margin: 10px;
+  width: 300px;
+  margin: 5px;
   position: relative;
   padding: 10px;
   border-radius: 20px;
   z-index: 1;
+  color: white;
+  transition: 1s all;
+  font-size: 25px;
+  text-align: justify;
+  transform: scale(1);
+  animation: popup 1s;
+}
+
+@keyframes popup {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .projects {
   width: calc(100% - 20px);
   padding: 10px;
-  background-color: rgb(150, 219, 222);
+  background-color: rgb(94, 87, 103);
   text-align: center;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
-.container {
-  width: 80%;
+.projects .container {
+  width: 90%;
   display: grid;
   grid-template-columns: auto auto auto;
 }
@@ -122,10 +144,18 @@
   margin: 0px 10px;
 }
 
-@media only screen and (max-width: 630px) {
+@media only screen and (max-width: 720px) {
   .hero .font_box {
     background-color: transparent;
     border: none;
     box-shadow: none;
+  }
+
+  .hero .text {
+    color: white;
+  }
+
+  .interests .container {
+    flex-direction: column;
   }
 }
