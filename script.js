@@ -55,7 +55,7 @@ scene.add(Dlight2);
 //Post-Processing 
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
-composer.addPass(new UnrealBloomPass(new THREE.Vector2(350, 350), 0.7, 0.5, 0.5));
+composer.addPass(new UnrealBloomPass(new THREE.Vector2(350, 350), 0.5, 0.3, 0.5));
 
 // Load Globe model and add interest points
 const loader = new GLTFLoader();
