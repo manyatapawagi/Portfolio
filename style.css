@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Audiowide&family=Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
 * {
   margin: 0;
@@ -26,6 +26,7 @@
   justify-content: center;
   border: 8px solid #ce93d8;
   box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.05);
+  align-content: center;
 }
 
 .hero p {
@@ -51,7 +52,7 @@ h2 {
 }
 
 .text {
-  font-family: "Neuton", serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-weight: 300;
   color: #2b2b2b;
 }
@@ -144,11 +145,21 @@ h2 {
   margin: 0px 10px;
 }
 
+a {
+  text-decoration: none;
+  color: rgb(3, 134, 144);
+}
+
 @media only screen and (max-width: 720px) {
   .hero .font_box {
     background-color: transparent;
     border: none;
     box-shadow: none;
+    color: white;
+
+  a {
+      color: rgb(102, 245, 255);
+    }
   }
 
   .hero .text {
