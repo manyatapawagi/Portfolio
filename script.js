@@ -130,10 +130,12 @@ loader.load('globe.glb', function (gltf) {
         Laptop.position.set(0, 6, 0);
         Laptop.scale.set(2, 2, 2);
         Laptop.truY = -3;
+        Laptop.preY = 6;
 
         Headphone.scale.set(4.5, 4.5, 4.55);
         Headphone.position.set(0, 7, 0);
         Headphone.truY = -3;
+        Headphone.preY = 7;
         Headphone.rotation.x = Math.PI / 4;
 
         Geometry.rotation.y = Math.PI / 3;
@@ -141,10 +143,12 @@ loader.load('globe.glb', function (gltf) {
         Geometry.rotation.z = -Math.PI;
         Geometry.position.set(-0.75, 7, 0);
         Geometry.truY = -1.5;
+        Geometry.preY = 7;
         Geometry.scale.set(1.75, 1.75, 1.75);
 
         Books.scale.set(10, 10, 10);
         Books.position.set(0.25, 6, 0);
+        Books.preY = 6;
         Books.truY = -3.3;
 
         interest_models.push(Laptop, Headphone, Geometry, Books);
@@ -169,10 +173,14 @@ loader.load('globe.glb', function (gltf) {
 
         raycaster.setFromCamera(coords, camera);
 
-        const intersections = raycaster.intersectObjects(points.children, true);
+        const rotatable = raycaster.intersectObjects(globe.children, true);
 
-        if (intersections.length > 0) {
-            const clickedPoint = intersections[0].object;
+        const pointIntersections = raycaster.intersectObjects(points.children, true);
+
+        const globeIntersections = raycaster.intersectObjects([model], true);
+
+        if (pointIntersections.length > 0) {
+            const clickedPoint = pointIntersections[0].object;
             const index = interest_points.indexOf(clickedPoint);
 
             document.getElementById("interest").innerHTML = (interests[index]);
@@ -185,53 +193,82 @@ loader.load('globe.glb', function (gltf) {
             }
             clickedPoint.material = on_color;
 
-            // gsap.to(globe.rotation, {
-                // x: originalRotation.x,
-                // y: originalRotation.y,
-                // z: originalRotation.z,
-                // duration: 0.1,
-                // onComplete: () => {
-                    gsap.to(globe.position, {
-                        x: 2.8,
-                        y: -2.8,
-                        z: -1,
+            gsap.to(camera.position, {
+                x: 0,
+                y: -5,
+                z: 10,
+                duration: 0.5
+            });
+            gsap.to(controls.target, {
+                x: 0,
+                y: 0,
+                z: 0,
+                duration: 0.5,
+                onUpdate: () => controls.update()
+            });
+            gsap.to(globe.position, {
+                x: 2.8,
+                y: -2.8,
+                z: -1,
+                duration: 0.5
+            });
+            gsap.to(globe.scale, {
+                x: 0.5,
+                y: 0.5,
+                z: 0.5,
+                duration: 0.5,
+                onComplete: () => {
+                    interest_models.forEach(e => {
+                        e.visible = false;
+                    });
+                    interest_models[index].visible = true;
+                    gsap.to(interest_models[index].position, {
+                        x: 0,
+                        y: interest_models[index].truY,
+                        z: 0,
                         duration: 0.5
                     });
-                    gsap.to(globe.scale, {
-                        x: 0.5,
-                        y: 0.5,
-                        z: 0.5,
-                        duration: 0.5,
-                        onComplete: () => {
-                            interest_models.forEach(e => {
-                                e.visible = false;
-                            });
-                            interest_models[index].visible = true;
-
-                            // gsap.to(interest_models[index].rotation, {
-                            //     x: interest_models[index].orientation.x,
-                            //     y: interest_models[index].orientation.y,
-                            //     z: interest_models[index].orientation.z,
-                            //     duration: 0.1,
-                            //     onComplete: () => {
-                                    gsap.to(interest_models[index].position, {
-                                        x: 0,
-                                        y: interest_models[index].truY,
-                                        z: 0,
-                                        duration: 0.5
-                                    });
-                                // }
-                            // });
-                        }
-                    });
-                // }
-            // });
+                }
+            });
 
             controls.enableRotate = false;
 
-
-
         }
+
+        else if (pointIntersections.length === 0 && globeIntersections.length > 0) {
+
+            console.log("Globe clicked, resetting view");
+            gsap.to(globe.position, {
+                x: 0,
+                y: 0,
+                z: 0,
+                duration: 0.5
+            });
+            gsap.to(globe.scale, {
+                x: 1,
+                y: 1,
+                z: 1,
+                duration: 0.5,
+                onComplete: () => {
+                    for (let point of interest_points) {
+                        point.material = off_color;
+                    }
+                    document.getElementById("interest").innerHTML = "";
+                    controls.enableRotate = true;
+                }
+            });
+
+            interest_models.forEach(e => {
+                gsap.to(e.position, {
+                    x: 0,
+                    y: e.preY,
+                    z: 0,
+                    duration: 0.5
+                });
+                e.visible = false;
+            });
+        }
+
     }
 
     function animate() {
