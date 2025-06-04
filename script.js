@@ -10,6 +10,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x000000);
 
+//Renderer setup 
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('globeCanvas'), alpha: true });
 renderer.setSize(350, 350);
 renderer.physicallyCorrectLights = true;
@@ -40,7 +41,6 @@ const rgbeLoader = new RGBELoader();
 rgbeLoader.load('environment.hdr', function (texture) {
     texture.mapping = THREE.EquirectangularReflectionMapping;
     scene.environment = texture;
-    // scene.background = null;
     renderer.setClearColor(0x000000, 0);
 });
 
@@ -53,7 +53,7 @@ const Dlight2 = new THREE.DirectionalLight(0xffffff, 3);
 Dlight2.position.set(-5, -10, -5);
 scene.add(Dlight2);
 
-//Post-Processing 
+//Post-Processing / Compositing
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
 composer.addPass(new UnrealBloomPass(new THREE.Vector2(350, 350), 0.5, 0.3, 0.5));
@@ -75,6 +75,7 @@ loader.load('globe.glb', function (gltf) {
     const off_color = new THREE.MeshStandardMaterial({ color: 0xbde643 });
     const on_color = new THREE.MeshStandardMaterial({ color: 0x4ceb34 });
 
+    //create location points on the globe
     const points = new THREE.Group();
 
     const point1 = new THREE.Mesh(sphere, off_color);
@@ -103,6 +104,7 @@ loader.load('globe.glb', function (gltf) {
     var interest_models = [];
     let Laptop, Headphone, Geometry, Books;
 
+    // Load assets for each interest
     function loadAsset(url) {
         return new Promise((resolve, reject) => {
             loader.load(url, gltf => {
@@ -114,12 +116,16 @@ loader.load('globe.glb', function (gltf) {
         });
     }
 
+    // Load all assets concurrently
     Promise.all([
         loadAsset('laptop.glb'),       // for Web Dev
         loadAsset('headphone.glb'),    // for Music
         loadAsset('geometry.glb'),     // for 3D
         loadAsset('books.glb')         // for Learning
     ]).then(([laptop, headphone, geometry, books]) => {
+
+        // Create and position each model
+
         Laptop = laptop;
         Headphone = headphone;
         Geometry = geometry;
@@ -157,15 +163,14 @@ loader.load('globe.glb', function (gltf) {
 
     scene.add(assets);
 
-    const originalRotation = new THREE.Euler(0, 0, 0);
-
+    //Set up click event for interest points and globe
     const raycaster = new THREE.Raycaster();
-
     document.addEventListener('mousedown', onMouseDown);
 
     function onMouseDown(e) {
         const rect = renderer.domElement.getBoundingClientRect();
 
+        // Calculate mouse coordinates in normalized device coordinates (-1 to +1)
         const coords = new THREE.Vector2(
             ((e.clientX - rect.left) / rect.width) * 2 - 1,
             -((e.clientY - rect.top) / rect.height) * 2 + 1
@@ -173,10 +178,8 @@ loader.load('globe.glb', function (gltf) {
 
         raycaster.setFromCamera(coords, camera);
 
-        const rotatable = raycaster.intersectObjects(globe.children, true);
-
+        //check for intersections with points and globe
         const pointIntersections = raycaster.intersectObjects(points.children, true);
-
         const globeIntersections = raycaster.intersectObjects([model], true);
 
         if (pointIntersections.length > 0) {
@@ -193,6 +196,7 @@ loader.load('globe.glb', function (gltf) {
             }
             clickedPoint.material = on_color;
 
+            //The camera is positioned back to orginal position and controls updated to avoid mispositioning of geometries.
             gsap.to(camera.position, {
                 x: 0,
                 y: -5,
@@ -236,8 +240,7 @@ loader.load('globe.glb', function (gltf) {
         }
 
         else if (pointIntersections.length === 0 && globeIntersections.length > 0) {
-
-            console.log("Globe clicked, resetting view");
+            // Reset camera and globe position
             gsap.to(globe.position, {
                 x: 0,
                 y: 0,
