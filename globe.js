@@ -263,9 +263,7 @@ loader.load('globe.glb', function (gltf) {
 
             interest_models.forEach(e => {
                 gsap.to(e.position, {
-                    x: 0,
                     y: e.preY,
-                    z: 0,
                     duration: 0.5
                 });
                 e.visible = false;
