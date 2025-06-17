@@ -140,7 +140,6 @@ h2 {
 }
 
 .project {
-  aspect-ratio: 3/2;
   background-color: rgb(157, 159, 158);
   margin: 15px;
   box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.05);

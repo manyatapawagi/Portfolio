@@ -61,7 +61,7 @@ composer.addPass(new UnrealBloomPass(new THREE.Vector2(350, 350), 0.5, 0.3, 0.5)
 const loader = new GLTFLoader();
 
 // Load Globe model and add interest points
-loader.load('globe.glb', function (gltf) {
+loader.load('Asset Models/globe.glb', function (gltf) {
 
     const globe = new THREE.Group();
 
@@ -118,10 +118,10 @@ loader.load('globe.glb', function (gltf) {
 
     // Load all assets concurrently
     Promise.all([
-        loadAsset('laptop.glb'),       // for Web Dev
-        loadAsset('headphone.glb'),    // for Music
-        loadAsset('geometry.glb'),     // for 3D
-        loadAsset('books.glb')         // for Learning
+        loadAsset('Asset Models/laptop.glb'),       // for Web Dev
+        loadAsset('Asset Models/headphone.glb'),    // for Music
+        loadAsset('Asset Models/geometry.glb'),     // for 3D
+        loadAsset('Asset Models/books.glb')         // for Learning
     ]).then(([laptop, headphone, geometry, books]) => {
 
         // Create and position each model
