@@ -58,6 +58,12 @@ body {
   color: #b72bde;
 }
 
+.sub-heading {
+  font-size: 30px;
+  font-family: "Audiowide", sans-serif;
+  color: #2b2b2b;
+}
+
 h2 {
   font-family: "Audiowide", sans-serif;
   text-align: center;
@@ -140,9 +146,24 @@ h2 {
 }
 
 .project {
-  background-color: rgb(157, 159, 158);
+  background-color: rgb(73, 74, 74);
   margin: 15px;
   box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  border: 2px solid rgb(82, 81, 81);
+  height: fit-content;
+}
+
+.project img, video {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.project-title {
+  font-family: "Audiowide", sans-serif;
+  font-size: 20px;
+  color: #a5a4a4;
+  padding: 10px;
 }
 
 .footer {
@@ -180,4 +201,10 @@ a {
   .interests .container {
     flex-direction: column;
   }
+
+  .projects .container {
+  width: 90%;
+  display: grid;
+  grid-template-columns: auto auto;
+}
 }
