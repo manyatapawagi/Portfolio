@@ -72,17 +72,20 @@ loader.load('Asset Models/globe.glb', function (gltf) {
     globe.add(model);
 
     const sphere = new THREE.SphereGeometry(0.2);
-    const off_color = new THREE.MeshStandardMaterial({ color: 0xbde643 });
+    const yellow = new THREE.MeshStandardMaterial({ color: 0xbde643 });
+    const pink = new THREE.MeshStandardMaterial({ color: 0xFF3399 });
+    const purple = new THREE.MeshStandardMaterial({ color: 0x9900CC });
+    const blue = new THREE.MeshStandardMaterial({ color: 0x0066FF });
     const on_color = new THREE.MeshStandardMaterial({ color: 0x4ceb34 });
 
     //create location points on the globe
     const points = new THREE.Group();
 
-    const point1 = new THREE.Mesh(sphere, off_color);
+    const point1 = new THREE.Mesh(sphere, yellow);
     point1.position.set(-1, -1, 2.8);
-    const point2 = point1.clone();
-    const point3 = point1.clone();
-    const point4 = point1.clone();
+    const point2 = new THREE.Mesh(sphere, pink);
+    const point3 = new THREE.Mesh(sphere, purple);
+    const point4 = new THREE.Mesh(sphere, blue);
 
     points.add(point1, point2, point3, point4);
 
