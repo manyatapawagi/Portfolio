@@ -96,8 +96,8 @@ loader.load('Asset Models/globe.glb', function (gltf) {
 
     var interest_points = [point1, point2, point3, point4];
     var interests = ["<h2> Web Development </h2> <p> I have been making websites since I was 11 years old. I've always felt that making websites is a way a child like me can get their ideas out into the world.</p>",
-        "<h2>Music</h2><p>My habit of listening to music whenever possible is enough to imply that it has, kind of, become my daily routine. Some of my favourite artists are Twenty One pilots, Halsey, Lana Del Rey and Taylor Swift, among many others.",
-        "<h2>3D Animation</h2><p>Though it's one of my more recently discovered interests, its the most important one. I've always been interested in art, of different forms, from quilling to clay and painting to origami, creating things that mimic the real world always caught my eye.</p>",
+        "<h2>Music</h2><p>My habit of listening to music whenever possible is enough to imply that it has, kind of, become my daily routine. Some of my favourite artists are Twenty One pilots, Arctic Monkeys, The Last Shadow Puppets, The Neighbourhood, Lana Del Rey and Taylor Swift, among many others.",
+        "<h2>3D Animation</h2><p>I've always been interested in art, of different forms, from quilling to clay and painting to origami, creating things that mimic the real world always caught my eye.</p>",
         "<h2>Learning</h2><p>Yep! Besides being a compulsion (PCM students can understand), learning new stuff is something I always look up to, in hopes of upgrading myself and my projects.</p>"];
 
     const assets = new THREE.Group();
