@@ -73,7 +73,7 @@ loader.load('Asset Models/globe.glb', function (gltf) {
 
     const sphere = new THREE.SphereGeometry(0.2);
     const yellow = new THREE.MeshStandardMaterial({ color: 0xbde643 });
-    const pink = new THREE.MeshStandardMaterial({ color: 0xFF3399 });
+    const orange = new THREE.MeshStandardMaterial({ color: 0xFF6600 });
     const purple = new THREE.MeshStandardMaterial({ color: 0x9900CC });
     const blue = new THREE.MeshStandardMaterial({ color: 0x0066FF });
     const on_color = new THREE.MeshStandardMaterial({ color: 0x4ceb34 });
@@ -82,10 +82,17 @@ loader.load('Asset Models/globe.glb', function (gltf) {
     const points = new THREE.Group();
 
     const point1 = new THREE.Mesh(sphere, yellow);
+    point1.originalMaterial = yellow;
     point1.position.set(-1, -1, 2.8);
-    const point2 = new THREE.Mesh(sphere, pink);
+
+    const point2 = new THREE.Mesh(sphere, orange);
+    point2.originalMaterial = orange;
+
     const point3 = new THREE.Mesh(sphere, purple);
+    point3.originalMaterial = purple;
+
     const point4 = new THREE.Mesh(sphere, blue);
+    point4.originalMaterial = blue;
 
     points.add(point1, point2, point3, point4);
 
@@ -100,7 +107,7 @@ loader.load('Asset Models/globe.glb', function (gltf) {
     var interest_points = [point1, point2, point3, point4];
     var interests = ["<h2> Web Development </h2> <p> I have been making websites since I was 11 years old. The mere thought of how creative I can be with a simple hyperlink button has always fascinated me. I love making the most out of what these front-end development languages have to offer.</p>",
         "<h2>Music</h2><p>Listening to music for me, has become somewhat a routinery activity. It's one of my favourite ways to rest my mind and enjoy some time solitarily. Some of my favourite artists are Twenty One pilots, Arctic Monkeys, The Last Shadow Puppets, The Neighbourhood, Lana Del Rey and Taylor Swift, among many others. I'm also an intermediate ukulele player and plan to learn guitar at some point in the future!",
-        "<h2>3D Animation</h2><p>I've always been interested in art, of different forms, from quilling to clay, painting to origami and storytelling to poetry, creating things that mimic/reflect the real world always captivated me. One day, I hope to use animations to bring poetic ideas to life, telling stories that resonate through vivid visuals </p>",
+        "<h2>3D Animation</h2><p>I've always been interested in art, of different forms, from quilling to clay, painting to origami and storytelling to poetry, creating things that mimic/reflect the real world always captivated me. One day, I hope to use animations to bring poetic ideas to life, telling stories that resonate through vivid visuals. </p>",
         "<h2>Learning</h2><p>Yep! Besides being a compulsion (PCM students can understand), learning new stuff is something I always look up to, in hopes of upgrading myself and my projects.</p>"];
 
     const assets = new THREE.Group();
@@ -195,7 +202,7 @@ loader.load('Asset Models/globe.glb', function (gltf) {
             document.getElementById("interest").style.animation = 'popup 0.25s';
 
             for (let point of interest_points) {
-                point.material = off_color;
+                point.material = point.originalMaterial;
             }
             clickedPoint.material = on_color;
 
@@ -257,7 +264,7 @@ loader.load('Asset Models/globe.glb', function (gltf) {
                 duration: 0.5,
                 onComplete: () => {
                     for (let point of interest_points) {
-                        point.material = off_color;
+                        point.material = point.originalMaterial;
                     }
                     document.getElementById("interest").innerHTML = "";
                     controls.enableRotate = true;
